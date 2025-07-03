@@ -1,0 +1,53 @@
+services:
+  backend_bolt:
+    build: ./backend
+    container_name: backend-bolt
+    ports:
+      - "8100:8100"
+    volumes:
+      - ./backend:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+      - CLICKHOUSE_HOST=clickhouse-bolt
+      - CLICKHOUSE_PORT=8123
+      - CLICKHOUSE_DB=bitget
+      - CLICKHOUSE_USER=default
+      - CLICKHOUSE_PASSWORD=
+    depends_on:
+      clickhouse-bolt:
+        condition: service_healthy
+
+  frontend_bolt:
+    build: ./frontend
+    container_name: frontend-bolt
+    ports:
+      - "8180:8080"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://backend_bolt:8100
+    depends_on:
+      - backend_bolt
+
+  clickhouse-bolt:
+    image: clickhouse/clickhouse-server:23.8
+    container_name: clickhouse-bolt
+    ports:
+      - "8124:8123"
+      - "9100:9000"
+    volumes:
+      - clickhouse-bolt-data:/var/lib/clickhouse
+    environment:
+      - CLICKHOUSE_DB=bitget
+      - CLICKHOUSE_USER=default
+      - CLICKHOUSE_PASSWORD=
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8123/ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  clickhouse-bolt-data:
