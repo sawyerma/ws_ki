@@ -1,44 +1,64 @@
 # Logs
-logs
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Node.js
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+dist-ssr/
 *.local
 
-# Editor directories and files
-.vscode/*
+# Build/Cache
+frontend/.vite/
+frontend/.cache/
+frontend/.output/
+frontend/.nuxt/
+frontend/.next/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtualenvs
+venv/
+.venv/
+ENV/
+env/
+
+# Editor
+.vscode/
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables
 .env
 
-# Python/Venv
-__pycache__/
-*.pyc
-.venv/
-.env
-
-# VS Code
-.vscode/
-
-# Datenbanken, Dumps
+# Datenbanken/Dumps
 *.db
 *.sqlite
 *.sqlite3
-*.log
 
-# Docker Volumes/Datenbanken
+# Docker/Datenbank-Volumes
 /var/lib/clickhouse/
 clickhouse-data/
+docker-data/
+mysql-data/
+postgres-data/
+
+# Data Science
+*.ipynb
+*.parquet
+*.feather
