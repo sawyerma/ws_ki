@@ -1,7 +1,7 @@
 -- Use main ML/Trading-Datenbank
 CREATE DATABASE IF NOT EXISTS websocket_ml;
 
--- Modelle/Registry
+-- Modelle/Registr y
 CREATE TABLE IF NOT EXISTS websocket_ml.ml_models (
     id String,
     name String,
