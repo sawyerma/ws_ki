@@ -1,6 +1,15 @@
-# Basis-Stack für FastAPI, ClickHouse, Docker & Whale-Detection
+# requirements.txt
+# ================================================
+# KI-Protokoll-Stack 2025 – ws-ki (Projektstand 2025-07-01)
+# Python-Version: >=3.11,<3.12
+# Empfohlene Nutzung: venv + pyproject.toml + requirements.txt
+# ================================================
 
-# --- Standard ---
+# Python-Version für das Projekt
+# (zur Kontrolle, eigentliche Enforcement via pyproject.toml)
+# requires-python = ">=3.11,<3.12"
+
+# === BASIS: FastAPI, ClickHouse, Docker ===
 annotated-types==0.7.0
 anyio==4.9.0
 click==8.2.1
@@ -22,14 +31,29 @@ watchfiles==1.1.0
 websockets==15.0.1
 clickhouse-connect==0.7.9
 
-# --- Empfohlene Erweiterungen für Web, Requests, EVM/Krypto ---
-httpx>=0.26.0        # Async HTTP-Client für REST, Webhook, API-Calls
-web3==6.19.0           # EVM-Integration, Whale-Detection, Ethereum/WebSocket
+# === INDICATORS: DataFrame, Math, TA, Signalprocessing ===
+pandas==2.2.2
+numpy==1.26.4
+pandas-ta==0.3.14b0        # Für ALMA, TA-Indikatoren
+scipy==1.13.1              # Für FFT, Signalverarbeitung (Spectral/Extrema)
+plotly==5.22.0             # Für optionale Plot-Ausgabe der Elliott Waves
 
-# --- (Optional, für Bilder, AI, etc.) ---
-pillow==10.3.0        # Images/Screenshots
-# openai==1.30.1        # AI-Integration, wenn OpenAI genutzt wird
+# === Empfohlene Erweiterungen für Web, Requests, EVM/Krypto ===
+httpx==0.27.0              # Async HTTP-Client (REST, Webhook, API)
+web3==6.19.0               # EVM-Integration, Whale-Detection, Ethereum/WebSocket
 
-# --- (Optional: Benachrichtigungen, Scheduler, Telegram etc.) ---
-python-telegram-bot==20.8  # Für Telegram-Nachrichten
-aiojobs==1.2.1            # Für asynchrone Scheduled Tasks (Cron/Scheduler)
+# === (Optional: Bilder, AI etc.) ===
+pillow==10.3.0
+# openai==1.30.1            # AI-Integration, falls benötigt
+
+# === (Optional: Benachrichtigungen, Scheduler, Telegram etc.) ===
+python-telegram-bot==20.8
+aiojobs==1.2.1
+
+# === (Optional: Entwicklungs-/Analyse-Tools) ===
+ipython==8.25.0
+jupyterlab==4.2.2
+
+# === (Optional: Typing, Linting, Tests) ===
+mypy==1.10.0
+pytest==8.2.2
